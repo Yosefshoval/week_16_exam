@@ -36,6 +36,12 @@ spec:
           value: root
         - name: MONGO_INITDB_ROOT_PASSWORD
           value: password
+        - name: MONGO_URI
+          value: "mongodb://silent-payroll-mongo-svc:27017/"
+        - name: MONGO_DB
+          value: "testdb"
+        - name: MONGO_COLLECTION
+          value: "testcollection"
         volumeMounts:
         - name: mongodb-data
           mountPath: /data/db

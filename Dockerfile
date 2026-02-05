@@ -8,4 +8,6 @@ RUN pip install -r requirements.txt
 
 COPY ./app .
 
+COPY employee_data_advanced.json .
+
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
