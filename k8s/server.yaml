@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: yosefshoval/silent-payroll:v2
+        image: yosefshoval/silent-payroll:v3
         ports:
         - containerPort: 8000
         env:
