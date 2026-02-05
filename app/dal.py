@@ -40,3 +40,11 @@ def get_employees_by_age_and_role():
     return result
 
     
+def get_top_seniority_employees_excluding_hr():
+    result = Collection.find(
+        {'$ne' : {'job_role.department' : 'HR'}}
+    ).sort('years_at_company', -1).limit(7)
+
+    result = convert_multiple_doc(result)
+    return result
+    
