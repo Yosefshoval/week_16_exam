@@ -9,27 +9,32 @@ mongo_db = getenv("MONGO_DB", "testdb")
 mongo_collection = getenv("MONGO_COLLECTION", "testcollection")
 file_path = r'employee_data_advanced.json'
 
-print('# Making Connection')
-myclient = MongoClient(
-    host=mongo_uri,
-    port=27017,
-    username=MONGO_USER,
-    password=MONGO_PASS
-)
-myclient.admin.command('ping')
-print(myclient)
+myclient = None
+Collection = None
 
-print('# database')
-db = myclient[mongo_db]
+def init_database():
+    global myclient, Collection
+    print('# Making Connection')
+    myclient = MongoClient(
+        host=mongo_uri,
+        port=27017,
+        username=MONGO_USER,
+        password=MONGO_PASS
+    )
+    myclient.admin.command('ping')
+    print(myclient)
 
-print('# Created or Switched to collection')
-Collection = db[mongo_collection]
+    print('# database')
+    db = myclient[mongo_db]
 
-print('# Loading or Opening the json file')
-with open(file_path) as file:
-    print
-    file_data = json.load(file)
+    print('# Created or Switched to collection')
+    Collection = db[mongo_collection]
 
-print('# Inserting the loaded data in the Collection')
-ins_result = Collection.insert_many(file_data)
-print('inserted')
+    print('# Loading or Opening the json file')
+    with open(file_path) as file:
+        print
+        file_data = json.load(file)
+
+    print('# Inserting the loaded data in the Collection')
+    ins_result = Collection.insert_many(file_data)
+    print('inserted: ', ins_result.inserted_ids)

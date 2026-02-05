@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from routes import router
-from connection import myclient
+from connection import init_database, myclient
 
 app = FastAPI()
 app.include_router(router)
@@ -10,6 +10,14 @@ app.include_router(router)
 def healthcheck():
     return {'message' : 'healthy'}
 
+
+@app.get('/create-connection')
+def create_connection():
+    try:
+        init_database()
+        return {'message' : 'MongoDB is connected'}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get('/check_connection')
 def check_connection():

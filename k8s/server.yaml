@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: yosefshoval/silent-payroll:v1
+        image: yosefshoval/silent-payroll:v2
         ports:
         - containerPort: 8000
         env:
@@ -37,3 +37,9 @@ spec:
           value: "root"
         - name: MONGO_INITDB_ROOT_PASSWORD
           value: "password"
+        - name: MONGO_URI
+          value: "silent-payroll-mongo-svc"
+        - name: MONGO_DB
+          value: "testdb"
+        - name: MONGO_COLLECTION
+          value: "testcollection"
