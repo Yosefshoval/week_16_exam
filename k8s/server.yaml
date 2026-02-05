@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: silent-payroll-svc
 spec:
+  type: NodePort
   selector:
     app: silent-payroll
   ports:

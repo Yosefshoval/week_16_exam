@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: silent-payroll-mongo
-        image: mongo:latest
+        image: mongo:8.0-ubi8 
         ports:
         - containerPort: 27017
         env:
@@ -37,7 +37,7 @@ spec:
         - name: MONGO_INITDB_ROOT_PASSWORD
           value: password
         - name: MONGO_URI
-          value: "mongodb://silent-payroll-mongo-svc:27017/"
+          value: "silent-payroll-mongo-svc"
         - name: MONGO_DB
           value: "testdb"
         - name: MONGO_COLLECTION
