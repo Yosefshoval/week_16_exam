@@ -7,7 +7,11 @@ def conver_id_to_string(doc):
         doc["_id"] = str(doc["_id"])
 
 def convert_multiple_doc(docs):
-    return [conver_id_to_string(doc) for doc in docs]
+    if not docs:
+        return docs
+    if isinstance(list, docs):
+        return [conver_id_to_string(doc) for doc in docs]
+    return conver_id_to_string(docs)
 
 
 def get_engineering_high_salary_employees():
