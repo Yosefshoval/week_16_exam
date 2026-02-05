@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: silent-payroll-svc
+spec:
+  selector:
+    app: silent-payroll
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: silent-payroll
+spec:
+  serviceName: silent-payroll-svc
+  replicas: 1
+  selector:
+    matchLabels:
+      app: silent-payroll
+  template:
+    metadata:
+      labels:
+        app: silent-payroll
+    spec:
+      containers:
+      - name: server
+        image: yosefshoval/silent-payroll:v1
+        ports:
+        - containerPort: 8000
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: "root"
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: "password"
