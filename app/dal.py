@@ -71,3 +71,15 @@ def get_managers_excluding_departments():
     
     result = convert_multiple_doc(result)
     return result
+
+
+def get_employees_by_lastname_and_age():
+    result = Collection.find({'$and' : [
+        {'name' : {'$regex' : '.+[ Wright| Nelson]$'}},
+        {'age' : {'$lt' : 35}}
+        ]},
+        {'name' : 1, 'age' : 1, 'job_role.department' : 1}
+    )
+
+    result = convert_multiple_doc(result)
+    return result
