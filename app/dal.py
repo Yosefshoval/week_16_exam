@@ -29,10 +29,8 @@ def get_employees_by_age_and_role():
             {{'age' : {'$gte' : 30}}, 
              {'age' : {'$lte' : 45}}
              }, 
-            {'$or' : [
-                {'job_role.department' : 'Engineer'}, 
-                {'job_role.department' : 'Specialist'}
-                ]}
+            {'job_role' : 
+                {'$in' : ['Engineer', 'Specialis']}}
             ]},
         {'employee_id': 1, 'name': 1, 'salary' : 1}
         )
@@ -47,4 +45,16 @@ def get_top_seniority_employees_excluding_hr():
 
     result = convert_multiple_doc(result)
     return result
-    
+
+
+def get_employees_by_age_or_seniority():
+    result = Collection.find(
+        {'$or' [
+            {'age' : {'$gt' : 50}}, 
+            {'years_at_company' : {'$lt' : 3}}
+            ]},
+        {'employee_id' : 1, 'name' : 1, 'age' : 1, 'years_at_company' : 1}
+        )
+
+    result = convert_multiple_doc(result)
+    return result
